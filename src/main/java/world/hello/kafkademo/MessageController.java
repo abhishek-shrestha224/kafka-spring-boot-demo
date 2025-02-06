@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    public MessageController(final KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
     @PostMapping
     public void publish(@RequestBody final String message) {
         kafkaTemplate.send("Dinosaurs", message);
